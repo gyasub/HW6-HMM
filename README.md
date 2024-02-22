@@ -33,10 +33,10 @@ decode_observation_states: The sequence of observation states to decode.
 Returns a list of the most likely sequence of hidden states.
 
 
-Usage
+**Usage**
 To use this script, instantiate the HiddenMarkovModel class with your model parameters, then call the forward or viterbi methods with your sequence of observation states.
 
-# Example instantiation
+# Example Initialization
 hmm = HiddenMarkovModel(observation_states, hidden_states, prior_p, transition_p, emission_p)
 
 # Run forward algorithm
