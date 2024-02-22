@@ -1,85 +1,52 @@
-# HW6-HMM
+Hidden Markov Model Implementation
+This script provides an implementation of a Hidden Markov Model (HMM), a statistical model that represents systems with hidden states. The model can be used to predict a sequence of hidden states based on a sequence of observed events. This implementation includes methods for running the forward algorithm and the Viterbi algorithm on a given sequence of observation states.
 
-In this assignment, you'll implement the Forward and Viterbi Algorithms (dynamic programming). 
+Features
+Initialization: Set up an HMM with specified observation states, hidden states, prior probabilities, transition probabilities, and emission probabilities.
+Forward Algorithm: Calculate the likelihood of a given sequence of observation states.
+Viterbi Algorithm: Determine the most likely sequence of hidden states given a sequence of observation states.
 
+Methods
+Initialization
+The HiddenMarkovModel class is initialized with the following parameters:
 
-# Assignment
+observation_states: An array of observed states in the system.
+hidden_states: An array of hidden states in the model.
+prior_p: Prior probabilities of each hidden state.
+transition_p: Transition probability matrix, representing the probabilities of transitioning from one hidden state to another.
+emission_p: Emission probability matrix, representing the probabilities of an observed state being generated from a hidden state.
 
-## Overview 
+Forward Algorithm
+forward(self, input_observation_states: np.ndarray) -> float
 
-The goal of this assignment is to implement the Forward and Viterbi Algorithms for Hidden Markov Models (HMMs).
+Calculates the forward probability (likelihood) of the observed sequence.
 
-For a helpful refresher on HMMs and the Forward and Viterbi Algorithms you can check out the resources [here](https://web.stanford.edu/~jurafsky/slp3/A.pdf), 
-[here](https://towardsdatascience.com/markov-and-hidden-markov-model-3eec42298d75), and [here](https://pieriantraining.com/viterbi-algorithm-implementation-in-python-a-practical-guide/). 
+input_observation_states: The sequence of observation states to calculate the likelihood for.
+Returns the likelihood of the observed sequence.
 
+Viterbi Algorithm
+viterbi(self, decode_observation_states: np.ndarray) -> list
 
+Determines the most likely sequence of hidden states that could have generated the given sequence of observation states.
 
-
-
-## Tasks and Data 
-Please complete the `forward` and `viterbi` functions in the HiddenMarkovModel class. 
-
-We have provided two HMM models (mini_weather_hmm.npz and full_weather_hmm.npz) which explore the relationships between observable weather phenomenon and the temperature outside. Start with the mini_weather_hmm model for testing and debugging. Both include the following arrays:
-* `hidden_states`: list of possible hidden states 
-* `observation_states`: list of possible observation states 
-* `prior_p`: prior probabilities of hidden states (in order given in `hidden_states`) 
-* `transition_p`: transition probabilities of hidden states (in order given in `hidden_states`)
-* `emission_p`: emission probabilities (`hidden_states` --> `observation_states`)
-
-
-
-For both datasets, we also provide input observation sequences and the solution for their best hidden state sequences. 
- * `observation_state_sequence`: observation sequence to test 
-* `best_hidden_state_sequence`: correct viterbi hidden state sequence 
-
-
-Create an HMM class instance for both models and test that your Forward and Viterbi implementation returns the correct probabilities and hidden state sequence for each of the observation sequences.
-
-Within your code, consider the scope of the inputs and how the different parameters of the input data could break the bounds of your implementation.
-  * Do your model probabilites add up to the correct values? Is scaling required?
-  * How will your model handle zero-probability transitions? 
-  * Are the inputs in compatible shapes/sizes which each other? 
-  * Any other edge cases you can think of?
-  * Ensure that your code accomodates at least 2 possible edge cases. 
-
-Finally, please update your README with a brief description of your methods. 
+decode_observation_states: The sequence of observation states to decode.
+Returns a list of the most likely sequence of hidden states.
 
 
+Usage
+To use this script, instantiate the HiddenMarkovModel class with your model parameters, then call the forward or viterbi methods with your sequence of observation states.
 
-## Task List
+# Example instantiation
+hmm = HiddenMarkovModel(observation_states, hidden_states, prior_p, transition_p, emission_p)
 
-[TODO] Complete the HiddenMarkovModel Class methods  <br>
-  [ ] complete the `forward` function in the HiddenMarkovModelClass <br>
-  [ ] complete the `viterbi` function in the HiddenMarkovModelClass <br>
+# Run forward algorithm
+likelihood = hmm.forward(input_observation_states)
 
-[TODO] Unit Testing  <br>
-  [ ] Ensure functionality on mini and full weather dataset <br>
-  [ ] Account for edge cases 
-
-[TODO] Packaging <br>
-  [ ] Update README with description of your methods <br>
-  [ ] pip installable module (optional)<br>
-  [ ] github actions (install + pytest) (optional)
+# Run Viterbi algorithm
+best_sequence = hmm.viterbi(decode_observation_states)
 
 
-## Completing the Assignment 
-Push your code to GitHub with passing unit tests, and submit a link to your repository [here](https://forms.gle/xw98ZVQjaJvZaAzSA)
-
-### Grading 
-
-* Algorithm implementation (6 points)
-    * Forward algorithm is correct (2)
-    * Viterbi is correct (2)
-    * Output is correct on small weather dataset (1)
-    * Output is correct on full weather dataset (1)
-
-* Unit Tests (3 points)
-    * Mini model unit test (1)
-    * Full model unit test (1)
-    * Edge cases (1)
-
-* Style (1 point)
-    * Readable code and updated README with a description of your methods 
-
-* Extra credit (0.5 points)
-    * Pip installable and Github actions (0.5)
+Requirements
+Python 3.x
+NumPy
+Ensure NumPy is installed in your Python environment to utilize this script.
